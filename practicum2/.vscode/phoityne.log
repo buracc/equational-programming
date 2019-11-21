@@ -1,0 +1,5 @@
+2019-11-21 19:26:00 [ThreadId 15] ERROR phoityne - load file fail.[/home/burak/Documents/EP/practicum2/test/Spec.hs]
+2019-11-21 19:26:00 [ThreadId 15] ERROR phoityne - startup load error. /home/burak/Documents/EP/practicum2/test/Spec.hs
+
+2019-11-21 19:27:32 [ThreadId 15] ERROR phoityne - "error: parse error on input \8216then\8217"
+2019-11-21 19:27:46 [ThreadId 15] ERROR phoityne - "\"extractSourcePosition\" (line 2, column 6):\nunexpected end of input\nexpecting \"Stopped at \" or \"Stopped in \" [INPUT]Node Leaf 1 (Node Leaf 2 (Node Leaf 3 (Node Leaf 4 (Node Leaf 5 Leaf))))\nH>>= "
