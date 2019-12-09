@@ -13,7 +13,7 @@ Sources:
  https://stackoverflow.com/questions/1105765/generating-fibonacci-numbers-in-haskell
  The exercise notes, section 4.4
  http://learnyouahaskell.com/zippers
-
+ https://rosettacode.org/wiki/Towers_of_Hanoi#Haskell 
 -}
 
 -- -------------------------
@@ -43,7 +43,7 @@ nothreefolds = removeif (\x -> x == 0 || mod x 3 == 0) naturals
 
 -- Exercise 5
 allnfolds :: Integer -> [Integer]
-allnfolds n = map (\x -> x * n) naturals
+allnfolds n = (map (\x -> x * n) naturals)
 
 -- Exercise 6
 allnaturalsexceptnfolds :: Integer -> [Integer]
@@ -200,13 +200,19 @@ insert x (Node l el r) =
 createbinarysearchtree :: (Ord a, Eq a) => [a] -> BinaryTree a
 createbinarysearchtree [] = Leaf
 createbinarysearchtree (h:t) = createbinarysearchtree' t (Node Leaf h Leaf)
+createbinarysearchtree' [] (Node l el r) = (Node l el r)
 createbinarysearchtree' (h:[]) (Node l el r) = insert h (Node l el r)
 createbinarysearchtree' (h:t) (Node l el r) = createbinarysearchtree' t (insert h (Node l el r))
 
 -- Exercise 6
 remove :: (Ord a, Eq a) => a -> BinaryTree a -> BinaryTree a
-remove = undefined
+remove n (Node l el r) = 
+    if iselement n (Node l el r) then
+        remove' el (Node l el r)
+    else (Node l el r)
 
+remove' n (Node l el r) = 
+    createbinarysearchtree(removeif (\x -> n == x) (flatten (Node l el r)))
 
 ----------------------------
 -- Exercise Tower of Hanoi
@@ -215,4 +221,12 @@ remove = undefined
 type Rod = String
 type Move = (Integer, Rod, Rod)
 hanoi :: Integer -> Rod -> Rod -> Rod -> [Move]
-hanoi = undefined
+hanoi 0 a b c = []
+hanoi n a b c = hanoi (n - 1) a c b ++ [(n, a, b)] ++ hanoi (n - 1) c b a
+
+{-
+Here, n is the number of disks to use. The smallest disk will have the value 1 for n. 
+The largest disk will be have the input value n. 
+Parameters a b c are the rods 1 to 3 respectively. 
+In this solution, c is the auxiliary rod, and b is the 'end' rod
+-}
